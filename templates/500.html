@@ -1,0 +1,60 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}Error 500 - Error de Servidor{% endblock %}
+
+{% block content %}
+<!-- Main Content Area -->
+<div class="flex flex-col flex-1 px-6 py-12 justify-center items-center">
+    <!-- Illustration Section -->
+    <div class="flex flex-col items-center gap-8 w-full max-w-md">
+        <div class="relative w-48 h-48 bg-primary/10 dark:bg-primary/5 rounded-full flex items-center justify-center">
+            <!-- Abstract Technical Glitch / Gear Visual -->
+            <div class="absolute inset-0 flex items-center justify-center animate-pulse">
+                <span class="material-symbols-outlined text-primary text-7xl opacity-20">settings</span>
+            </div>
+            <div class="relative bg-primary text-white p-8 rounded-3xl shadow-xl shadow-primary/20">
+                <span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">build</span>
+            </div>
+            <div
+                class="absolute -bottom-2 -right-2 bg-white dark:bg-background-dark p-3 rounded-full shadow-md border border-gray-100 dark:border-gray-700">
+                <span class="material-symbols-outlined text-primary text-2xl">priority_high</span>
+            </div>
+        </div>
+        <!-- Error Message -->
+        <div class="flex flex-col items-center gap-3 text-center">
+            <h1 class="text-7xl font-bold text-sky-700">
+                500
+            </h1>
+            <h1 class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-tight px-4">
+                Error Interno del Servidor
+            </h1>
+            <p class="text-[#4e5b6b] dark:text-gray-400 text-base font-normal leading-relaxed max-w-[320px]">
+                Estamos experimentando dificultades técnicas y estamos trabajando para solucionarlo.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Action Buttons (Bottom Sticky Area) -->
+<div class="p-6 bg-white dark:bg-[#1a242d] rounded-t-xl shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)]">
+    <div class="flex flex-col gap-3 w-full max-w-md mx-auto">
+        <!-- Primary Action: Report Problem -->
+        <button
+            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+            <span class="truncate">Reportar Problema</span>
+        </button>
+        <!-- Secondary Action: Retry -->
+        <button
+            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-6 bg-transparent text-[#111418] dark:text-white text-base font-bold leading-normal tracking-[0.015em] border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            <span class="truncate">Reintentar</span>
+        </button>
+        <!-- Safe Exit Link -->
+        <div class="flex justify-center mt-2">
+            <button class="text-primary text-sm font-semibold py-2">
+                <a href="{% url 'home' %}">Regresar al inicio</a>
+            </button>
+        </div>
+    </div>
+    <!-- iOS Home Indicator Spacing -->
+    <div class="h-6"></div>
+</div>
+{% endblock %}

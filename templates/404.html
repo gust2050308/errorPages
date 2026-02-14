@@ -1,0 +1,71 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}Error 404 - No Encontrado{% endblock %}
+
+{% block content %}
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden font-display">
+  <!-- TopAppBar Component (Customized for Error State) -->
+  <main class="flex-1 flex flex-col items-center justify-center px-6 py-10 max-w-lg mx-auto w-full">
+    <!-- HeaderImage Component (Lost Compass Illustration Concept) -->
+    <div class="w-full @container mb-8">
+      <div class="@[480px]:px-4">
+        <div
+          class="w-full aspect-square max-w-[280px] mx-auto bg-primary/10 rounded-full flex items-center justify-center relative overflow-hidden group">
+          <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
+          <span class="material-symbols-outlined text-[120px] text-primary"
+            style="font-variation-settings: 'wght' 200;">explore_off</span>
+          <!-- Abstract decorative elements -->
+          <div class="absolute top-10 right-10 w-4 h-4 rounded-full bg-primary/30"></div>
+          <div class="absolute bottom-12 left-12 w-6 h-6 rounded-full bg-primary/20"></div>
+        </div>
+      </div>
+    </div>
+    <!-- HeadlineText Component -->
+    <h1 class="text-primary dark:text-primary tracking-tight text-[84px] font-extrabold leading-none text-center pb-2">
+      404</h1>
+    <!-- TitleText Component -->
+    <h2 class="text-[#111318] dark:text-white text-[24px] font-bold leading-tight tracking-[-0.015em] text-center pb-4">
+      Página no encontrada</h2>
+    <!-- BodyText Component -->
+    <p class="text-[#111318]/70 dark:text-gray-400 text-base font-normal leading-relaxed pb-8 text-center px-2">Lo
+      sentimos, el enlace que seguiste puede estar roto o la página ha sido eliminada por completo.</p>
+    <!-- Action Button (Modified for Home) -->
+    <button
+      class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mb-10">
+      <span class="material-symbols-outlined">home</span>
+      <a href="{% url 'home' %}">Regresar al inicio</a>
+    </button>
+    <!-- Navigation/Sitemap Section -->
+    <div class="w-full grid grid-cols-1 gap-3 mt-auto">
+      <p class="text-[#111318]/40 dark:text-gray-500 text-xs font-bold uppercase tracking-widest text-center mb-2">
+        También puedes visitar</p>
+      <a class="flex items-center justify-between p-4 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        href="#">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">account_tree</span>
+          <span class="font-semibold text-[#111318] dark:text-white">Mapa del sitio</span>
+        </div>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </a>
+      <a class="flex items-center justify-between p-4 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        href="#">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">help</span>
+          <span class="font-semibold text-[#111318] dark:text-white">Centro de ayuda</span>
+        </div>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </a>
+      <a class="flex items-center justify-between p-4 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        href="#">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">mail</span>
+          <span class="font-semibold text-[#111318] dark:text-white">Contactar Soporte</span>
+        </div>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </a>
+    </div>
+  </main>
+  <!-- Footer Spacer -->
+  <footer class="h-10 bg-transparent"></footer>
+</div>
+{% endblock %}

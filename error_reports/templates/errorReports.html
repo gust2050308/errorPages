@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<style>
+    /* Estilos para badges de códigos de error */
+    .error-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .error-4xx {
+        background-color: #fee2e2 !important;
+        /* bg-red-100 */
+        color: #ef4444 !important;
+        /* text-red-500 */
+    }
+
+    .error-5xx {
+        background-color: #fecaca !important;
+        /* bg-red-200 */
+        color: #991b1b !important;
+        /* text-red-800 */
+    }
+
+    .error-other {
+        background-color: #f3f4f6 !important;
+        /* bg-gray-100 */
+        color: #6b7280 !important;
+        /* text-gray-600 */
+    }
+</style>
+
+
+<div class="max-w-7xl mx-auto">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Reportes de Errores</h1>
+
+        <div id="errorReports"></div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Título</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Descripción</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo
+                            de Error</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">URL
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Método HTTP</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP
+                            del Cliente</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha
+                            del Reporte</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Activo</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    const errorReports = document.getElementById('errorReports');
+    const tableBody = document.querySelector('table tbody');
+    fetch('/errorReports/?format=json')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(errorReport => {
+                const row = document.createElement('tr');
+
+                // Determinar la clase según el tipo de error
+                let tipoErrorClass = 'error-other';
+                if (errorReport.tipo_error.toLowerCase().startsWith('4')) {
+                    tipoErrorClass = 'error-4xx';
+                } else if (errorReport.tipo_error.toLowerCase().startsWith('5')) {
+                    tipoErrorClass = 'error-5xx';
+                }
+
+                row.className = 'hover:bg-gray-50 transition';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${errorReport.titulo}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">${errorReport.descripcion}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="error-badge ${tipoErrorClass}">${errorReport.tipo_error}</span></td>
+                    <td class="px-6 py-4 text-sm text-blue-600 hover:text-blue-800"><a href="${errorReport.url}" target="_blank">${errorReport.url}</a></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${errorReport.metodo_http}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${errorReport.ip_cliente || 'N/A'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${errorReport.fecha_reporte}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                        ${errorReport.activo ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Activo</span>' : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Inactivo</span>'}
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error(error));
+</script>
+
+{% endblock %}
